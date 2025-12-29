@@ -28,6 +28,18 @@ jobs:
         mkdir -p llvm-dist
         tar -xf llvm.tar.xz -C llvm-dist --strip-components 1
 
+    - name: Download and Extract Custom CMake
+      run: |
+        CMAKE_URL="https://github.com/Silverlan/CMake/releases/download/2025-12-23/windows_x64.tar.xz"
+        curl -L "$CMAKE_URL" -o cmake.tar.xz
+        mkdir -p cmake-dist
+        tar -xf cmake.tar.xz -C cmake-dist --strip-components 1
+        
+        # Convert to Windows path and add to GITHUB_PATH
+        # Prepending this ensures 'cmake' refers to this version
+        CMAKE_BIN_WIN=$(cygpath -w "$(pwd)/cmake-dist/bin")
+        echo "$CMAKE_BIN_WIN" >> $GITHUB_PATH
+
     - name: Configure and Build
       run: |
         # Get the absolute path for the LLVM bin directory
