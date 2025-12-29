@@ -1,0 +1,51 @@
+name: Windows Clang Build
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Download LLVM
+      shell: pwsh
+      run: |
+        $url = "https://github.com/llvm/llvm-project/releases/download/llvmorg-21.1.8/clang+llvm-21.1.8-x86_64-pc-windows-msvc.tar.xz"
+        curl -L $url -o llvm.tar.xz
+
+    - name: Extract LLVM
+      shell: pwsh
+      run: |
+        # Create a directory for extraction
+        mkdir llvm-dist
+        # Windows 'tar' supports .xz via libarchive
+        tar -xf llvm.tar.xz -C llvm-dist --strip-components 1
+
+    - name: Configure and Build
+      shell: pwsh
+      run: |
+        # Add the extracted clang bin to the path
+        $llvm_bin = "$(pwd)/llvm-dist/bin"
+        $env:PATH = "$llvm_bin;$env:PATH"
+        echo "PATH=$env:PATH" >> $env:GITHUB_PATH
+
+        # Use CMake with Ninja and point to the specific Clang compilers
+        cmake -S . -B build `
+          -G "Ninja" `
+          -DCMAKE_C_COMPILER="$llvm_bin/clang-cl.exe" `
+          -DCMAKE_CXX_COMPILER="$llvm_bin/clang-cl.exe" `
+          -DCMAKE_BUILD_TYPE=Release
+
+        cmake --build build
+
+    - name: Run Executable
+      shell: pwsh
+      run: |
+        ./build/hello_world.exe
