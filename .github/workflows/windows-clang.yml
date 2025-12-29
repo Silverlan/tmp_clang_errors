@@ -70,5 +70,5 @@ jobs:
 
     - name: Run Executable
       run: |
-        ls -r
+        ls -R
         ./install/lib_b.exe
