@@ -65,7 +65,8 @@ jobs:
           -DCMAKE_EXPORT_COMPILE_COMMANDS=1 \
           -DCMAKE_BUILD_TYPE=Release
 
-        cmake --build . --target install
+        cmake --build .
+        cmake --install .
 
     - name: Run Executable
       run: |
