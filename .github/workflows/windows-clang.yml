@@ -38,6 +38,7 @@ jobs:
         # Add to GITHUB_PATH so subsequent steps see it
         echo "$LLVM_BIN_WIN" >> $GITHUB_PATH
 
+        cd lib_b
         mkdir build
         cd build
 
