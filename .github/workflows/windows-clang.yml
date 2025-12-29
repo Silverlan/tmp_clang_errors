@@ -50,6 +50,7 @@ jobs:
         # Add to GITHUB_PATH so subsequent steps see it
         echo "$LLVM_BIN_WIN" >> $GITHUB_PATH
 
+        root=$PWD
         cd lib_b
         mkdir build
         cd build
@@ -59,12 +60,13 @@ jobs:
           -G "Ninja" \
           -DCMAKE_C_COMPILER="$LLVM_BIN_WIN/clang.exe" \
           -DCMAKE_CXX_COMPILER="$LLVM_BIN_WIN/clang++.exe" \
+          -DCMAKE_INSTALL_PREFIX:PATH="$root/install" \
           -DCMAKE_CXX_SCAN_FOR_MODULES=1 \
           -DCMAKE_EXPORT_COMPILE_COMMANDS=1 \
           -DCMAKE_BUILD_TYPE=Release
 
-        cmake --build build
+        cmake --build . --target install
 
     - name: Run Executable
       run: |
-        ./lib_b/build/lib_b.exe
+        ./install/lib_b.exe
