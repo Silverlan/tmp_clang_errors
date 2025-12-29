@@ -1,5 +1,5 @@
 
-
+export module test_module;
 
 struct Vector3 {
     float x;
@@ -9,5 +9,4 @@ struct Vector3 {
 
 export namespace test {
     constexpr Vector3 A = Vector3 {1.f,2.f,3.f};
-
 }
