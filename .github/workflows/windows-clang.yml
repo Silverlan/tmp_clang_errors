@@ -59,7 +59,8 @@ jobs:
           -G "Ninja" \
           -DCMAKE_C_COMPILER="$LLVM_BIN_WIN/clang-cl.exe" \
           -DCMAKE_CXX_COMPILER="$LLVM_BIN_WIN/clang-cl.exe" \
-          -DCMAKE_CXX_SCAN_FOR_MODULES=ON \
+          -DCMAKE_CXX_SCAN_FOR_MODULES=1 \
+          -DCMAKE_EXPORT_COMPILE_COMMANDS=1 \
           -DCMAKE_BUILD_TYPE=Release
 
         cmake --build build
