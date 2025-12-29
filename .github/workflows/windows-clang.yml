@@ -56,7 +56,7 @@ jobs:
         cd build
 
         # Configure using Ninja and pointing to clang-cl
-        cmake -S .. -B build \
+        cmake -S .. -B . \
           -G "Ninja" \
           -DCMAKE_C_COMPILER="$LLVM_BIN_WIN/clang.exe" \
           -DCMAKE_CXX_COMPILER="$LLVM_BIN_WIN/clang++.exe" \
