@@ -1,4 +1,4 @@
-name: Windows Clang Build
+name: Windows Clang Build (Bash)
 
 on:
   push:
@@ -9,43 +9,47 @@ on:
 jobs:
   build:
     runs-on: windows-latest
+    # Setting the default shell to bash for all steps in this job
+    defaults:
+      run:
+        shell: bash
 
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
 
     - name: Download LLVM
-      shell: pwsh
       run: |
-        $url = "https://github.com/llvm/llvm-project/releases/download/llvmorg-21.1.8/clang+llvm-21.1.8-x86_64-pc-windows-msvc.tar.xz"
-        curl -L $url -o llvm.tar.xz
+        URL="https://github.com/llvm/llvm-project/releases/download/llvmorg-21.1.8/clang+llvm-21.1.8-x86_64-pc-windows-msvc.tar.xz"
+        curl -L "$URL" -o llvm.tar.xz
 
     - name: Extract LLVM
-      shell: pwsh
       run: |
-        # Create a directory for extraction
-        mkdir llvm-dist
-        # Windows 'tar' supports .xz via libarchive
+        mkdir -p llvm-dist
         tar -xf llvm.tar.xz -C llvm-dist --strip-components 1
 
     - name: Configure and Build
-      shell: pwsh
       run: |
-        # Add the extracted clang bin to the path
-        $llvm_bin = "$(pwd)/llvm-dist/bin"
-        $env:PATH = "$llvm_bin;$env:PATH"
-        echo "PATH=$env:PATH" >> $env:GITHUB_PATH
+        # Get the absolute path for the LLVM bin directory
+        # Using cygpath to ensure Windows-style paths for CMake
+        LLVM_BIN_UNIX="$(pwd)/llvm-dist/bin"
+        LLVM_BIN_WIN=$(cygpath -w "$LLVM_BIN_UNIX")
+        
+        # Add to GITHUB_PATH so subsequent steps see it
+        echo "$LLVM_BIN_WIN" >> $GITHUB_PATH
 
-        # Use CMake with Ninja and point to the specific Clang compilers
-        cmake -S . -B build `
-          -G "Ninja" `
-          -DCMAKE_C_COMPILER="$llvm_bin/clang-cl.exe" `
-          -DCMAKE_CXX_COMPILER="$llvm_bin/clang-cl.exe" `
+        mkdir build
+        cd build
+
+        # Configure using Ninja and pointing to clang-cl
+        cmake -S .. -B build \
+          -G "Ninja" \
+          -DCMAKE_C_COMPILER="$LLVM_BIN_WIN/clang-cl.exe" \
+          -DCMAKE_CXX_COMPILER="$LLVM_BIN_WIN/clang-cl.exe" \
           -DCMAKE_BUILD_TYPE=Release
 
         cmake --build build
 
     - name: Run Executable
-      shell: pwsh
       run: |
         ./build/hello_world.exe
