@@ -50,8 +50,6 @@ jobs:
         # Add to GITHUB_PATH so subsequent steps see it
         echo "$LLVM_BIN_WIN" >> $GITHUB_PATH
 
-        clang-scan-deps
-
         cd lib_b
         mkdir build
         cd build
@@ -59,8 +57,8 @@ jobs:
         # Configure using Ninja and pointing to clang-cl
         cmake -S .. -B build \
           -G "Ninja" \
-          -DCMAKE_C_COMPILER="$LLVM_BIN_WIN/clang-cl.exe" \
-          -DCMAKE_CXX_COMPILER="$LLVM_BIN_WIN/clang-cl.exe" \
+          -DCMAKE_C_COMPILER="$LLVM_BIN_WIN/clang.exe" \
+          -DCMAKE_CXX_COMPILER="$LLVM_BIN_WIN/clang++.exe" \
           -DCMAKE_CXX_SCAN_FOR_MODULES=1 \
           -DCMAKE_EXPORT_COMPILE_COMMANDS=1 \
           -DCMAKE_BUILD_TYPE=Release
