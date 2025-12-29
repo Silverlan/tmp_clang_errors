@@ -9,6 +9,8 @@ project(lib_b LANGUAGES CXX)
 
 add_subdirectory(lib_a)
 
+install(TARGETS lib_b lib_a DESTINATION .)
+
 add_executable(lib_b main.cpp)
 
 target_link_libraries(lib_b PUBLIC lib_a)
