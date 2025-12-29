@@ -67,4 +67,4 @@ jobs:
 
     - name: Run Executable
       run: |
-        ./build/hello_world.exe
+        ./lib_b/build/lib_b.exe
