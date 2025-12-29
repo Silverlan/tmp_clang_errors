@@ -45,6 +45,7 @@ jobs:
         cd lib_b
         cd lib_a
         git clone https://github.com/g-truc/glm.git
+        git fetch --all --tags
         git checkout 1.0
 
     - name: Configure and Build
