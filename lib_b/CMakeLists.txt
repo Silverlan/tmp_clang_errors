@@ -16,4 +16,8 @@ target_compile_definitions(lib_b PRIVATE "-DTEST_CASE=${TEST_CASE}")
 
 target_link_libraries(lib_b PUBLIC lib_a)
 
+if(UNIX)
+    set_target_properties(lib_b PROPERTIES INSTALL_RPATH "\$ORIGIN")
+endif()
+
 install(TARGETS lib_b lib_a DESTINATION .)
