@@ -1,3 +1,6 @@
 [submodule "lib_b/lib_a/glm"]
 	path = lib_b/lib_a/glm
 	url = https://github.com/g-truc/glm.git
+[submodule "test_program/test_library/glm"]
+	path = test_program/test_library/glm
+	url = https://github.com/g-truc/glm.git
