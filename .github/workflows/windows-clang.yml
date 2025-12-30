@@ -40,12 +40,6 @@ jobs:
         CMAKE_BIN_WIN=$(cygpath -w "$(pwd)/cmake-dist/bin")
         echo "$CMAKE_BIN_WIN" >> $GITHUB_PATH
 
-    - name: Checkout GLM
-      run: |
-        cd lib_b
-        cd lib_a
-        git clone https://github.com/g-truc/glm.git
-
     - name: Setup Path
       run: |
         # Get the absolute path for the LLVM bin directory
