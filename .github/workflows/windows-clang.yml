@@ -44,9 +44,11 @@ jobs:
     - name: Test Case 0
       if: always()
       shell: cmd
-      run: ./test_program/build.bat 0
+      working-directory: ./test_program
+      run: build.bat 0
 
     - name: Test Case 1
       if: always()
       shell: cmd
-      run: ./test_program/build.bat 1
+      working-directory: ./test_program
+      run: build.bat 1
