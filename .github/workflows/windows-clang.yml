@@ -75,7 +75,7 @@ jobs:
           -DTEST_CASE=0
         cmake --build .
         cmake --install .
-        ../install/lib_b.exe
+        $root/install/lib_b.exe
 
     - name: Test Case 1
       if: always()
