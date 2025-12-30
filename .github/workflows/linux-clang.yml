@@ -5,6 +5,7 @@ on:
     branches: [ "undefined-symbol" ]
   pull_request:
     branches: [ "undefined-symbol" ]
+  dispatch:
 
 jobs:
   build:
