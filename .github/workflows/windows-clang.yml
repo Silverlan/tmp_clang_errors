@@ -93,7 +93,7 @@ jobs:
           -DTEST_CASE=1
         cmake --build .
         cmake --install .
-        ../install/lib_b.exe
+        $root/install/lib_b.exe
 
     - name: Test Case 2
       if: always()
@@ -111,7 +111,7 @@ jobs:
           -DTEST_CASE=2
         cmake --build .
         cmake --install .
-        ../install/lib_b.exe
+        $root/install/lib_b.exe
 
     - name: Test Case 3
       if: always()
@@ -129,7 +129,7 @@ jobs:
           -DTEST_CASE=3
         cmake --build .
         cmake --install .
-        ../install/lib_b.exe
+        $root/install/lib_b.exe
 
     - name: Test Case 4
       if: always()
@@ -147,4 +147,4 @@ jobs:
           -DTEST_CASE=4
         cmake --build .
         cmake --install .
-        ../install/lib_b.exe
+        $root/install/lib_b.exe
