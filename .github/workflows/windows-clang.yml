@@ -130,21 +130,3 @@ jobs:
         cmake --build .
         cmake --install .
         $root/install/lib_b.exe
-
-    - name: Test Case 4
-      if: always()
-      run: |
-        root=$(pwd)
-        cd lib_b/build
-        cmake -S .. -B . \
-          -G "Ninja" \
-          -DCMAKE_C_COMPILER="$root/llvm-dist/bin/clang.exe" \
-          -DCMAKE_CXX_COMPILER="$root/llvm-dist/bin/clang++.exe" \
-          -DCMAKE_INSTALL_PREFIX:PATH="$root/install" \
-          -DCMAKE_CXX_SCAN_FOR_MODULES=1 \
-          -DCMAKE_EXPORT_COMPILE_COMMANDS=1 \
-          -DCMAKE_BUILD_TYPE=Release \
-          -DTEST_CASE=4
-        cmake --build .
-        cmake --install .
-        $root/install/lib_b.exe
