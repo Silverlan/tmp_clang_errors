@@ -63,7 +63,7 @@ jobs:
       if: always()
       run: |
         root=$(pwd)
-        cd build
+        cd lib_b/build
         cmake -S .. -B . \
           -G "Ninja" \
           -DCMAKE_C_COMPILER="$LLVM_BIN_WIN/clang.exe" \
@@ -81,7 +81,7 @@ jobs:
       if: always()
       run: |
         root=$(pwd)
-        cd build
+        cd lib_b/build
         cmake -S .. -B . \
           -G "Ninja" \
           -DCMAKE_C_COMPILER="$LLVM_BIN_WIN/clang.exe" \
@@ -99,7 +99,7 @@ jobs:
       if: always()
       run: |
         root=$(pwd)
-        cd build
+        cd lib_b/build
         cmake -S .. -B . \
           -G "Ninja" \
           -DCMAKE_C_COMPILER="$LLVM_BIN_WIN/clang.exe" \
@@ -117,7 +117,7 @@ jobs:
       if: always()
       run: |
         root=$(pwd)
-        cd build
+        cd lib_b/build
         cmake -S .. -B . \
           -G "Ninja" \
           -DCMAKE_C_COMPILER="$LLVM_BIN_WIN/clang.exe" \
@@ -135,7 +135,7 @@ jobs:
       if: always()
       run: |
         root=$(pwd)
-        cd build
+        cd lib_b/build
         cmake -S .. -B . \
           -G "Ninja" \
           -DCMAKE_C_COMPILER="$LLVM_BIN_WIN/clang.exe" \
