@@ -2,7 +2,6 @@ cmake_minimum_required(VERSION 4.0)
 
 message(STATUS "CMake version: ${CMAKE_VERSION}")
 
-set(CMAKE_EXPERIMENTAL_CXX_IMPORT_STD "d0edc3af-4c50-42ea-a356-e2862fe7a444")
 set(CMAKE_CXX_STANDARD 23)
 
 set(TEST_CASE 0 CACHE STRING "Test Case")
@@ -10,7 +9,6 @@ set(TEST_CASE 0 CACHE STRING "Test Case")
 project(lib_b LANGUAGES CXX)
 
 add_subdirectory(lib_a)
-
 
 add_executable(lib_b main.cpp)
 

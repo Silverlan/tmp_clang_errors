@@ -32,9 +32,6 @@ jobs:
         mkdir -p llvm-dist
         tar -xf llvm.tar.xz -C llvm-dist --strip-components 1
 
-    - name: Setup cmake
-      uses: jwlawson/actions-setup-cmake@v2
-
     - name: Setup Path
       run: |
         # Add LLVM to GITHUB_PATH
