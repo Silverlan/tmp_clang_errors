@@ -43,42 +43,9 @@ jobs:
 
     - name: Test Case 0
       if: always()
-      shell: cmd
-      working-directory: ./test_program
-      run: build.bat 0
-
-    - name: Test Case 1
-      if: always()
-      shell: cmd
-      working-directory: ./test_program
-      run: build.bat 1
-
-    - name: Test Case 2
-      if: always()
-      shell: cmd
-      working-directory: ./test_program
-      run: build.bat 2
-
-    - name: Test Case 3
-      if: always()
-      shell: cmd
-      working-directory: ./test_program
-      run: build.bat 3
-
-    - name: Test Case 4
-      if: always()
-      shell: cmd
-      working-directory: ./test_program
-      run: build.bat 4
-
-    - name: Test Case 5
-      if: always()
-      shell: cmd
-      working-directory: ./test_program
-      run: build.bat 5
-
-    - name: Test Case 6
-      if: always()
-      shell: cmd
-      working-directory: ./test_program
-      run: build.bat 6
+      run: |
+        clang++ -std=c++20 test_module/test_module.cppm --precompile -o test_module/test_module.pcm
+        clang++ -std=c++20 test_module/test_module.pcm -c -o test_module/test_module.o
+        clang++ -shared -o test_module/libtest_module.so test_module/test_module.o
+        clang++ -std=c++20 main.cpp -fprebuilt-module-path=test_module -c -o main.o -DTEST_CASE="$1"
+        clang++ main.o test_module/libtest_module.so -o app
