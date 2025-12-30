@@ -98,3 +98,13 @@ jobs:
         cmake --build test_program/build
         cmake --install test_program/build
         & "$root/install/test_program.exe"
+
+    - name: Test Case 7
+      if: always()
+      run: |
+        $root = Get-Location
+        cmake -S test_program -B test_program/build `
+          -DTEST_CASE=7
+        cmake --build test_program/build
+        cmake --install test_program/build
+        & "$root/install/test_program.exe"
