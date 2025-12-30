@@ -2,9 +2,9 @@ name: Windows MSVC Build
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "undefined-symbol" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "undefined-symbol" ]
 
 jobs:
   build:

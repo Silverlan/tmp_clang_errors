@@ -2,14 +2,14 @@ name: Windows Clang Build (Bash)
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "undefined-symbol" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "undefined-symbol" ]
 
 jobs:
   build:
     runs-on: windows-latest
-    # Setting the default shell to bash for all steps in this job
+
     defaults:
       run:
         shell: bash
@@ -32,12 +32,9 @@ jobs:
 
     - name: Setup Path
       run: |
-        # Get the absolute path for the LLVM bin directory
-        # Using cygpath to ensure Windows-style paths for CMake
         LLVM_BIN_UNIX="$(pwd)/llvm-dist/bin"
         LLVM_BIN_WIN=$(cygpath -w "$LLVM_BIN_UNIX")
         
-        # Add to GITHUB_PATH so subsequent steps see it
         echo "$LLVM_BIN_WIN" >> $GITHUB_PATH
 
         cd test_program

@@ -2,9 +2,9 @@ name: Ubuntu Clang Build
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "undefined-symbol" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "undefined-symbol" ]
 
 jobs:
   build:
@@ -23,7 +23,6 @@ jobs:
 
     - name: Download LLVM
       run: |
-        # Using the Linux x86_64 Ubuntu build for LLVM 21.1.8
         URL="https://github.com/llvm/llvm-project/releases/download/llvmorg-21.1.8/LLVM-21.1.8-Linux-X64.tar.xz"
         curl -L "$URL" -o llvm.tar.xz
 
@@ -34,7 +33,6 @@ jobs:
 
     - name: Setup Path
       run: |
-        # Add LLVM to GITHUB_PATH
         echo "$(pwd)/llvm-dist/bin" >> $GITHUB_PATH
 
         cd test_program
