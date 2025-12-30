@@ -2,9 +2,9 @@ name: Windows Clang Build (Bash)
 
 on:
   push:
-    branches: [ "undefined-symbol" ]
+    branches: [ "undefined-symbol-case-5-verbose" ]
   pull_request:
-    branches: [ "undefined-symbol" ]
+    branches: [ "undefined-symbol-case-5-verbose" ]
   workflow_dispatch:
 
 jobs:
@@ -41,96 +41,6 @@ jobs:
         cd test_program
         mkdir build
 
-    - name: Test Case 0
-      if: always()
-      run: |
-        root=$(pwd)
-        cd test_program/build
-        cmake -S .. -B . \
-          -G "Ninja" \
-          -DCMAKE_C_COMPILER="$root/llvm-dist/bin/clang.exe" \
-          -DCMAKE_CXX_COMPILER="$root/llvm-dist/bin/clang++.exe" \
-          -DCMAKE_INSTALL_PREFIX:PATH="$root/install" \
-          -DCMAKE_CXX_SCAN_FOR_MODULES=1 \
-          -DCMAKE_EXPORT_COMPILE_COMMANDS=1 \
-          -DCMAKE_BUILD_TYPE=Release \
-          -DTEST_CASE=0
-        cmake --build .
-        cmake --install .
-        $root/install/test_program.exe
-
-    - name: Test Case 1
-      if: always()
-      run: |
-        root=$(pwd)
-        cd test_program/build
-        cmake -S .. -B . \
-          -G "Ninja" \
-          -DCMAKE_C_COMPILER="$root/llvm-dist/bin/clang.exe" \
-          -DCMAKE_CXX_COMPILER="$root/llvm-dist/bin/clang++.exe" \
-          -DCMAKE_INSTALL_PREFIX:PATH="$root/install" \
-          -DCMAKE_CXX_SCAN_FOR_MODULES=1 \
-          -DCMAKE_EXPORT_COMPILE_COMMANDS=1 \
-          -DCMAKE_BUILD_TYPE=Release \
-          -DTEST_CASE=1
-        cmake --build .
-        cmake --install .
-        $root/install/test_program.exe
-
-    - name: Test Case 2
-      if: always()
-      run: |
-        root=$(pwd)
-        cd test_program/build
-        cmake -S .. -B . \
-          -G "Ninja" \
-          -DCMAKE_C_COMPILER="$root/llvm-dist/bin/clang.exe" \
-          -DCMAKE_CXX_COMPILER="$root/llvm-dist/bin/clang++.exe" \
-          -DCMAKE_INSTALL_PREFIX:PATH="$root/install" \
-          -DCMAKE_CXX_SCAN_FOR_MODULES=1 \
-          -DCMAKE_EXPORT_COMPILE_COMMANDS=1 \
-          -DCMAKE_BUILD_TYPE=Release \
-          -DTEST_CASE=2
-        cmake --build .
-        cmake --install .
-        $root/install/test_program.exe
-
-    - name: Test Case 3
-      if: always()
-      run: |
-        root=$(pwd)
-        cd test_program/build
-        cmake -S .. -B . \
-          -G "Ninja" \
-          -DCMAKE_C_COMPILER="$root/llvm-dist/bin/clang.exe" \
-          -DCMAKE_CXX_COMPILER="$root/llvm-dist/bin/clang++.exe" \
-          -DCMAKE_INSTALL_PREFIX:PATH="$root/install" \
-          -DCMAKE_CXX_SCAN_FOR_MODULES=1 \
-          -DCMAKE_EXPORT_COMPILE_COMMANDS=1 \
-          -DCMAKE_BUILD_TYPE=Release \
-          -DTEST_CASE=3
-        cmake --build .
-        cmake --install .
-        $root/install/test_program.exe
-
-    - name: Test Case 4
-      if: always()
-      run: |
-        root=$(pwd)
-        cd test_program/build
-        cmake -S .. -B . \
-          -G "Ninja" \
-          -DCMAKE_C_COMPILER="$root/llvm-dist/bin/clang.exe" \
-          -DCMAKE_CXX_COMPILER="$root/llvm-dist/bin/clang++.exe" \
-          -DCMAKE_INSTALL_PREFIX:PATH="$root/install" \
-          -DCMAKE_CXX_SCAN_FOR_MODULES=1 \
-          -DCMAKE_EXPORT_COMPILE_COMMANDS=1 \
-          -DCMAKE_BUILD_TYPE=Release \
-          -DTEST_CASE=4
-        cmake --build .
-        cmake --install .
-        $root/install/test_program.exe
-
     - name: Test Case 5
       if: always()
       run: |
@@ -145,24 +55,8 @@ jobs:
           -DCMAKE_EXPORT_COMPILE_COMMANDS=1 \
           -DCMAKE_BUILD_TYPE=Release \
           -DTEST_CASE=5
-        cmake --build .
-        cmake --install .
-        $root/install/test_program.exe
-
-    - name: Test Case 6
-      if: always()
-      run: |
-        root=$(pwd)
-        cd test_program/build
-        cmake -S .. -B . \
-          -G "Ninja" \
-          -DCMAKE_C_COMPILER="$root/llvm-dist/bin/clang.exe" \
-          -DCMAKE_CXX_COMPILER="$root/llvm-dist/bin/clang++.exe" \
-          -DCMAKE_INSTALL_PREFIX:PATH="$root/install" \
-          -DCMAKE_CXX_SCAN_FOR_MODULES=1 \
-          -DCMAKE_EXPORT_COMPILE_COMMANDS=1 \
-          -DCMAKE_BUILD_TYPE=Release \
-          -DTEST_CASE=6
-        cmake --build .
+        echo "Verbose CMake Output"
+        cmake --build . --verbose
+        echo "Done!"
         cmake --install .
         $root/install/test_program.exe
