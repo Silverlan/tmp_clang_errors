@@ -90,22 +90,3 @@ int main() {
 }
 
 #endif
-
-
-
-
-
-
-
-// Test Case 7: Access member of constexpr vector from module test_module
-// Result: Build successful
-#if TEST_CASE == 7
-
-int main() {
-    std::cout<<test::TestClass::test_vector.x<<std::endl;
-    return 0;
-}
-
-#endif
-
-
