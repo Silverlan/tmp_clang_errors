@@ -46,7 +46,7 @@ jobs:
         cd lib_a
         git clone https://github.com/g-truc/glm.git
 
-    - name: Configure and Build
+    - name: Setup Path
       run: |
         # Get the absolute path for the LLVM bin directory
         # Using cygpath to ensure Windows-style paths for CMake
@@ -56,12 +56,14 @@ jobs:
         # Add to GITHUB_PATH so subsequent steps see it
         echo "$LLVM_BIN_WIN" >> $GITHUB_PATH
 
-        root=$(pwd)
         cd lib_b
         mkdir build
-        cd build
 
-        # Configure using Ninja and pointing to clang-cl
+    - name: Test Case 0
+      if: always()
+      run: |
+        root=$(pwd)
+        cd build
         cmake -S .. -B . \
           -G "Ninja" \
           -DCMAKE_C_COMPILER="$LLVM_BIN_WIN/clang.exe" \
@@ -69,12 +71,80 @@ jobs:
           -DCMAKE_INSTALL_PREFIX:PATH="$root/install" \
           -DCMAKE_CXX_SCAN_FOR_MODULES=1 \
           -DCMAKE_EXPORT_COMPILE_COMMANDS=1 \
-          -DCMAKE_BUILD_TYPE=Release
-
+          -DCMAKE_BUILD_TYPE=Release \
+          -DTEST_CASE=0
         cmake --build .
         cmake --install .
+        ../install/lib_b.exe
 
-    - name: Run Executable
+    - name: Test Case 1
+      if: always()
       run: |
-        echo "Executing..."
-        ./install/lib_b.exe
+        root=$(pwd)
+        cd build
+        cmake -S .. -B . \
+          -G "Ninja" \
+          -DCMAKE_C_COMPILER="$LLVM_BIN_WIN/clang.exe" \
+          -DCMAKE_CXX_COMPILER="$LLVM_BIN_WIN/clang++.exe" \
+          -DCMAKE_INSTALL_PREFIX:PATH="$root/install" \
+          -DCMAKE_CXX_SCAN_FOR_MODULES=1 \
+          -DCMAKE_EXPORT_COMPILE_COMMANDS=1 \
+          -DCMAKE_BUILD_TYPE=Release \
+          -DTEST_CASE=1
+        cmake --build .
+        cmake --install .
+        ../install/lib_b.exe
+
+    - name: Test Case 2
+      if: always()
+      run: |
+        root=$(pwd)
+        cd build
+        cmake -S .. -B . \
+          -G "Ninja" \
+          -DCMAKE_C_COMPILER="$LLVM_BIN_WIN/clang.exe" \
+          -DCMAKE_CXX_COMPILER="$LLVM_BIN_WIN/clang++.exe" \
+          -DCMAKE_INSTALL_PREFIX:PATH="$root/install" \
+          -DCMAKE_CXX_SCAN_FOR_MODULES=1 \
+          -DCMAKE_EXPORT_COMPILE_COMMANDS=1 \
+          -DCMAKE_BUILD_TYPE=Release \
+          -DTEST_CASE=2
+        cmake --build .
+        cmake --install .
+        ../install/lib_b.exe
+
+    - name: Test Case 3
+      if: always()
+      run: |
+        root=$(pwd)
+        cd build
+        cmake -S .. -B . \
+          -G "Ninja" \
+          -DCMAKE_C_COMPILER="$LLVM_BIN_WIN/clang.exe" \
+          -DCMAKE_CXX_COMPILER="$LLVM_BIN_WIN/clang++.exe" \
+          -DCMAKE_INSTALL_PREFIX:PATH="$root/install" \
+          -DCMAKE_CXX_SCAN_FOR_MODULES=1 \
+          -DCMAKE_EXPORT_COMPILE_COMMANDS=1 \
+          -DCMAKE_BUILD_TYPE=Release \
+          -DTEST_CASE=3
+        cmake --build .
+        cmake --install .
+        ../install/lib_b.exe
+
+    - name: Test Case 4
+      if: always()
+      run: |
+        root=$(pwd)
+        cd build
+        cmake -S .. -B . \
+          -G "Ninja" \
+          -DCMAKE_C_COMPILER="$LLVM_BIN_WIN/clang.exe" \
+          -DCMAKE_CXX_COMPILER="$LLVM_BIN_WIN/clang++.exe" \
+          -DCMAKE_INSTALL_PREFIX:PATH="$root/install" \
+          -DCMAKE_CXX_SCAN_FOR_MODULES=1 \
+          -DCMAKE_EXPORT_COMPILE_COMMANDS=1 \
+          -DCMAKE_BUILD_TYPE=Release \
+          -DTEST_CASE=4
+        cmake --build .
+        cmake --install .
+        ../install/lib_b.exe
