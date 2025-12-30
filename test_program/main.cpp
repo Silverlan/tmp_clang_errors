@@ -7,7 +7,7 @@ import test_module;
 #endif
 
 #if TEST_CASE == 2 || TEST_CASE == 3
-static void print_vec(const glm::vec3 v)
+static void print_vec(const TestVector v)
 {
     std::cout<<v.x<<","<<v.y<<","<<v.z<<std::endl;
 }
