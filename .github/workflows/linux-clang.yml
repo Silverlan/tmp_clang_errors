@@ -24,7 +24,7 @@ jobs:
     - name: Download LLVM
       run: |
         # Using the Linux x86_64 Ubuntu build for LLVM 21.1.8
-        URL="https://github.com/llvm/llvm-project/releases/download/llvmorg-21.1.8/clang+llvm-21.1.8-x86_64-linux-gnu-ubuntu-24.04.tar.xz"
+        URL="https://github.com/llvm/llvm-project/releases/download/llvmorg-21.1.8/LLVM-21.1.8-Linux-X64.tar.xz"
         curl -L "$URL" -o llvm.tar.xz
 
     - name: Extract LLVM
@@ -32,16 +32,8 @@ jobs:
         mkdir -p llvm-dist
         tar -xf llvm.tar.xz -C llvm-dist --strip-components 1
 
-    - name: Download and Extract Custom CMake
-      run: |
-        # Assuming the custom CMake has a linux_x64 version at the same location
-        CMAKE_URL="https://github.com/Silverlan/CMake/releases/download/2025-12-23/linux_x64.tar.xz"
-        curl -L "$CMAKE_URL" -o cmake.tar.xz
-        mkdir -p cmake-dist
-        tar -xf cmake.tar.xz -C cmake-dist --strip-components 1
-        
-        # Add to GITHUB_PATH
-        echo "$(pwd)/cmake-dist/bin" >> $GITHUB_PATH
+    - name: Setup cmake
+      uses: jwlawson/actions-setup-cmake@v2
 
     - name: Setup Path
       run: |
