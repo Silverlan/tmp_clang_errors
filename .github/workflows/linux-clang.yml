@@ -37,14 +37,14 @@ jobs:
         # Add LLVM to GITHUB_PATH
         echo "$(pwd)/llvm-dist/bin" >> $GITHUB_PATH
 
-        cd lib_b
+        cd test_program
         mkdir build
 
     - name: Test Case 0
       if: always()
       run: |
         root=$(pwd)
-        cd lib_b/build
+        cd test_program/build
         cmake -S .. -B . \
           -G "Ninja" \
           -DCMAKE_C_COMPILER="$root/llvm-dist/bin/clang" \
@@ -56,13 +56,13 @@ jobs:
           -DTEST_CASE=0
         cmake --build .
         cmake --install .
-        $root/install/lib_b
+        $root/install/test_program
 
     - name: Test Case 1
       if: always()
       run: |
         root=$(pwd)
-        cd lib_b/build
+        cd test_program/build
         cmake -S .. -B . \
           -G "Ninja" \
           -DCMAKE_C_COMPILER="$root/llvm-dist/bin/clang" \
@@ -74,13 +74,13 @@ jobs:
           -DTEST_CASE=1
         cmake --build .
         cmake --install .
-        $root/install/lib_b
+        $root/install/test_program
 
     - name: Test Case 2
       if: always()
       run: |
         root=$(pwd)
-        cd lib_b/build
+        cd test_program/build
         cmake -S .. -B . \
           -G "Ninja" \
           -DCMAKE_C_COMPILER="$root/llvm-dist/bin/clang" \
@@ -92,13 +92,13 @@ jobs:
           -DTEST_CASE=2
         cmake --build .
         cmake --install .
-        $root/install/lib_b
+        $root/install/test_program
 
     - name: Test Case 3
       if: always()
       run: |
         root=$(pwd)
-        cd lib_b/build
+        cd test_program/build
         cmake -S .. -B . \
           -G "Ninja" \
           -DCMAKE_C_COMPILER="$root/llvm-dist/bin/clang" \
@@ -110,4 +110,4 @@ jobs:
           -DTEST_CASE=3
         cmake --build .
         cmake --install .
-        $root/install/lib_b
+        $root/install/test_program
