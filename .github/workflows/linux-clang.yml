@@ -42,6 +42,5 @@ jobs:
     - name: Test Case 0
       if: always()
       run: |
-        root=$(pwd)
-        cd test_program
-        ./build.sh
+        chmod +x ./test_program/build.sh
+        ./test_program/build.sh 0
