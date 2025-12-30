@@ -8,4 +8,4 @@ project(lib_a LANGUAGES CXX)
 
 add_library(lib_a SHARED)
 
-target_sources(lib_a PUBLIC FILE_SET cxx_modules TYPE CXX_MODULES FILES b.cppm glm/glm/glm.cppm)
+target_sources(lib_a PUBLIC FILE_SET cxx_modules TYPE CXX_MODULES FILES test_module.cppm glm/glm/glm.cppm)
