@@ -2,9 +2,9 @@ name: Windows Clang Build (Bash)
 
 on:
   push:
-    branches: [ "undefined-symbol" ]
+    branches: [ "undefined-symbol", "undefined-symbol-clang-22" ]
   pull_request:
-    branches: [ "undefined-symbol" ]
+    branches: [ "undefined-symbol", "undefined-symbol-clang-22" ]
   workflow_dispatch:
 
 jobs:
