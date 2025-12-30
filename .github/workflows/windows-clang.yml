@@ -43,14 +43,10 @@ jobs:
 
     - name: Test Case 0
       if: always()
-      run: |
-        root=$(pwd)
-        cd test_program
-        cmd.exe /c build.bat 0
+      shell: cmd
+      run: build.bat 0
 
     - name: Test Case 1
       if: always()
-      run: |
-        root=$(pwd)
-        cd test_program
-        cmd.exe /c build.bat 1
+      shell: cmd
+      run: build.bat 1
