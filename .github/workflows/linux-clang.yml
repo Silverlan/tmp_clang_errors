@@ -45,3 +45,45 @@ jobs:
         cd test_program
         chmod +x ./build.sh
         ./build.sh 0
+
+    - name: Test Case 1
+      if: always()
+      run: |
+        cd test_program
+        chmod +x ./build.sh
+        ./build.sh 1
+
+    - name: Test Case 2
+      if: always()
+      run: |
+        cd test_program
+        chmod +x ./build.sh
+        ./build.sh 2
+
+    - name: Test Case 3
+      if: always()
+      run: |
+        cd test_program
+        chmod +x ./build.sh
+        ./build.sh 3
+
+    - name: Test Case 4
+      if: always()
+      run: |
+        cd test_program
+        chmod +x ./build.sh
+        ./build.sh 4
+
+    - name: Test Case 5
+      if: always()
+      run: |
+        cd test_program
+        chmod +x ./build.sh
+        ./build.sh 5
+
+    - name: Test Case 6
+      if: always()
+      run: |
+        cd test_program
+        chmod +x ./build.sh
+        ./build.sh 6

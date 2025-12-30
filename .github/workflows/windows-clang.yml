@@ -52,3 +52,33 @@ jobs:
       shell: cmd
       working-directory: ./test_program
       run: build.bat 1
+
+    - name: Test Case 2
+      if: always()
+      shell: cmd
+      working-directory: ./test_program
+      run: build.bat 2
+
+    - name: Test Case 3
+      if: always()
+      shell: cmd
+      working-directory: ./test_program
+      run: build.bat 3
+
+    - name: Test Case 4
+      if: always()
+      shell: cmd
+      working-directory: ./test_program
+      run: build.bat 4
+
+    - name: Test Case 5
+      if: always()
+      shell: cmd
+      working-directory: ./test_program
+      run: build.bat 5
+
+    - name: Test Case 6
+      if: always()
+      shell: cmd
+      working-directory: ./test_program
+      run: build.bat 6
