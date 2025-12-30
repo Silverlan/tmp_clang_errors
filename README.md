@@ -1,1 +1,0 @@
-# tmp_clang_errors
