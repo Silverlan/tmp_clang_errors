@@ -1,4 +1,4 @@
-name: Windows Clang Build (Bash)
+name: Windows Clang Build
 
 on:
   push:
@@ -43,6 +43,7 @@ jobs:
       run: |
         cd test_program
         mkdir debug_files
+        clang++.exe -std=c++20 test_module/test_module.cppm --precompile -o test_module/test_module.pcm -### 2> ./debug_files/clang_cmd_test_module.txt
         clang++.exe -std=c++20 test_module/test_module.cppm --precompile -o test_module/test_module.pcm
 
         clang++.exe -std=c++20 -S -emit-llvm test_module/test_module.pcm -o ./debug_files/test_module.ll
@@ -52,7 +53,7 @@ jobs:
         clang++.exe -std=c++20 main.cpp -fprebuilt-module-path=test_module -c -o main.o -DTEST_CASE=0
 
         # Debug Output
-        clang++.exe -std=c++20 main.cpp -fprebuilt-module-path=test_module -c -o main.o -DTEST_CASE=5 -### 2> ./debug_files/clang_cmd.txt
+        clang++.exe -std=c++20 main.cpp -fprebuilt-module-path=test_module -c -o main.o -DTEST_CASE=5 -### 2> ./debug_files/clang_cmd_main.txt
         clang++.exe -std=c++20 -fprebuilt-module-path=test_module -DTEST_CASE=0 -S -emit-llvm main.cpp -o ./debug_files/main_case0.ll
         clang++.exe -std=c++20 -fprebuilt-module-path=test_module -DTEST_CASE=1 -S -emit-llvm main.cpp -o ./debug_files/main_case1.ll
         clang++.exe -std=c++20 -fprebuilt-module-path=test_module -DTEST_CASE=2 -S -emit-llvm main.cpp -o ./debug_files/main_case2.ll
@@ -162,7 +163,7 @@ jobs:
         mkdir debug_files/case6
         cp ./test_module/test_module.lib debug_files/case6/
         cp ./test_module/test_module.dll debug_files/case6/
-        
+
         clang++.exe -std=c++20 main.cpp -fprebuilt-module-path=test_module -c -o main.o -DTEST_CASE=6
         clang++.exe -fuse-ld=lld main.o test_module/test_module.lib -o app.exe
 
