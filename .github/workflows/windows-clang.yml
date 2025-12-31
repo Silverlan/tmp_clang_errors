@@ -68,12 +68,13 @@ jobs:
         clang++.exe -std=c++20 test_module/test_module.cppm --precompile -o test_module/test_module.pcm
         clang++.exe -std=c++20 test_module/test_module.pcm -c -o test_module/test_module.o
         clang++.exe -fuse-ld=lld -shared -o test_module/test_module.dll test_module/test_module.o -Wl,/IMPLIB:test_module/test_module.lib
-        clang++.exe -std=c++20 main.cpp -fprebuilt-module-path=test_module -c -o main.o -DTEST_CASE=0
-        clang++.exe -fuse-ld=lld main.o test_module/test_module.lib -o app.exe
 
         mkdir debug_files/case0
         cp ./test_module/test_module.lib debug_files/case0/
         cp ./test_module/test_module.dll debug_files/case0/
+
+        clang++.exe -std=c++20 main.cpp -fprebuilt-module-path=test_module -c -o main.o -DTEST_CASE=0
+        clang++.exe -fuse-ld=lld main.o test_module/test_module.lib -o app.exe
 
     - name: Test Case 1
       if: always()
@@ -82,12 +83,13 @@ jobs:
         clang++.exe -std=c++20 test_module/test_module.cppm --precompile -o test_module/test_module.pcm
         clang++.exe -std=c++20 test_module/test_module.pcm -c -o test_module/test_module.o
         clang++.exe -fuse-ld=lld -shared -o test_module/test_module.dll test_module/test_module.o -Wl,/IMPLIB:test_module/test_module.lib
-        clang++.exe -std=c++20 main.cpp -fprebuilt-module-path=test_module -c -o main.o -DTEST_CASE=1
-        clang++.exe -fuse-ld=lld main.o test_module/test_module.lib -o app.exe
 
         mkdir debug_files/case1
         cp ./test_module/test_module.lib debug_files/case1/
         cp ./test_module/test_module.dll debug_files/case1/
+
+        clang++.exe -std=c++20 main.cpp -fprebuilt-module-path=test_module -c -o main.o -DTEST_CASE=1
+        clang++.exe -fuse-ld=lld main.o test_module/test_module.lib -o app.exe
 
     - name: Test Case 2
       if: always()
@@ -96,12 +98,13 @@ jobs:
         clang++.exe -std=c++20 test_module/test_module.cppm --precompile -o test_module/test_module.pcm
         clang++.exe -std=c++20 test_module/test_module.pcm -c -o test_module/test_module.o
         clang++.exe -fuse-ld=lld -shared -o test_module/test_module.dll test_module/test_module.o -Wl,/IMPLIB:test_module/test_module.lib
-        clang++.exe -std=c++20 main.cpp -fprebuilt-module-path=test_module -c -o main.o -DTEST_CASE=2
-        clang++.exe -fuse-ld=lld main.o test_module/test_module.lib -o app.exe
 
         mkdir debug_files/case2
         cp ./test_module/test_module.lib debug_files/case2/
         cp ./test_module/test_module.dll debug_files/case2/
+
+        clang++.exe -std=c++20 main.cpp -fprebuilt-module-path=test_module -c -o main.o -DTEST_CASE=2
+        clang++.exe -fuse-ld=lld main.o test_module/test_module.lib -o app.exe
 
     - name: Test Case 3
       if: always()
@@ -110,12 +113,13 @@ jobs:
         clang++.exe -std=c++20 test_module/test_module.cppm --precompile -o test_module/test_module.pcm
         clang++.exe -std=c++20 test_module/test_module.pcm -c -o test_module/test_module.o
         clang++.exe -fuse-ld=lld -shared -o test_module/test_module.dll test_module/test_module.o -Wl,/IMPLIB:test_module/test_module.lib
-        clang++.exe -std=c++20 main.cpp -fprebuilt-module-path=test_module -c -o main.o -DTEST_CASE=3
-        clang++.exe -fuse-ld=lld main.o test_module/test_module.lib -o app.exe
 
         mkdir debug_files/case3
         cp ./test_module/test_module.lib debug_files/case3/
         cp ./test_module/test_module.dll debug_files/case3/
+
+        clang++.exe -std=c++20 main.cpp -fprebuilt-module-path=test_module -c -o main.o -DTEST_CASE=3
+        clang++.exe -fuse-ld=lld main.o test_module/test_module.lib -o app.exe
 
     - name: Test Case 4
       if: always()
@@ -124,12 +128,13 @@ jobs:
         clang++.exe -std=c++20 test_module/test_module.cppm --precompile -o test_module/test_module.pcm
         clang++.exe -std=c++20 test_module/test_module.pcm -c -o test_module/test_module.o
         clang++.exe -fuse-ld=lld -shared -o test_module/test_module.dll test_module/test_module.o -Wl,/IMPLIB:test_module/test_module.lib
-        clang++.exe -std=c++20 main.cpp -fprebuilt-module-path=test_module -c -o main.o -DTEST_CASE=4
-        clang++.exe -fuse-ld=lld main.o test_module/test_module.lib -o app.exe
 
         mkdir debug_files/case4
         cp ./test_module/test_module.lib debug_files/case4/
         cp ./test_module/test_module.dll debug_files/case4/
+
+        clang++.exe -std=c++20 main.cpp -fprebuilt-module-path=test_module -c -o main.o -DTEST_CASE=4
+        clang++.exe -fuse-ld=lld main.o test_module/test_module.lib -o app.exe
  
     - name: Test Case 5
       if: always()
@@ -138,12 +143,13 @@ jobs:
         clang++.exe -std=c++20 test_module/test_module.cppm --precompile -o test_module/test_module.pcm
         clang++.exe -std=c++20 test_module/test_module.pcm -c -o test_module/test_module.o
         clang++.exe -fuse-ld=lld -shared -o test_module/test_module.dll test_module/test_module.o -Wl,/IMPLIB:test_module/test_module.lib
-        clang++.exe -std=c++20 main.cpp -fprebuilt-module-path=test_module -c -o main.o -DTEST_CASE=5
-        clang++.exe -fuse-ld=lld main.o test_module/test_module.lib -o app.exe
 
         mkdir debug_files/case5
         cp ./test_module/test_module.lib debug_files/case5/
         cp ./test_module/test_module.dll debug_files/case5/
+
+        clang++.exe -std=c++20 main.cpp -fprebuilt-module-path=test_module -c -o main.o -DTEST_CASE=5
+        clang++.exe -fuse-ld=lld main.o test_module/test_module.lib -o app.exe
 
     - name: Test Case 6
       if: always()
@@ -152,12 +158,13 @@ jobs:
         clang++.exe -std=c++20 test_module/test_module.cppm --precompile -o test_module/test_module.pcm
         clang++.exe -std=c++20 test_module/test_module.pcm -c -o test_module/test_module.o
         clang++.exe -fuse-ld=lld -shared -o test_module/test_module.dll test_module/test_module.o -Wl,/IMPLIB:test_module/test_module.lib
-        clang++.exe -std=c++20 main.cpp -fprebuilt-module-path=test_module -c -o main.o -DTEST_CASE=6
-        clang++.exe -fuse-ld=lld main.o test_module/test_module.lib -o app.exe
 
         mkdir debug_files/case6
         cp ./test_module/test_module.lib debug_files/case6/
         cp ./test_module/test_module.dll debug_files/case6/
+        
+        clang++.exe -std=c++20 main.cpp -fprebuilt-module-path=test_module -c -o main.o -DTEST_CASE=6
+        clang++.exe -fuse-ld=lld main.o test_module/test_module.lib -o app.exe
 
     - name: Upload Artifacts
       if: always()
