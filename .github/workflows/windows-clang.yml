@@ -70,7 +70,8 @@ jobs:
 
     - name: Run
       run: |
-        cp test_program/test_module/test_module.dll test_program/
+        cd test_program
+        cp test_module/test_module.dll ./
         ./app.exe
 
     - name: Upload Artifacts
