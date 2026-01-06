@@ -2,9 +2,9 @@ name: Windows Clang Build
 
 on:
   push:
-    branches: [ "undefined-symbol-no-cmake" ]
+    branches: [ "function-address-mismatch" ]
   pull_request:
-    branches: [ "undefined-symbol-no-cmake" ]
+    branches: [ "function-address-mismatch" ]
   workflow_dispatch:
 
 jobs:
