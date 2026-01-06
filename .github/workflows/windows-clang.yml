@@ -39,7 +39,6 @@ jobs:
         echo "$LLVM_BIN_WIN" >> $GITHUB_PATH
 
     - name: Output Debug Files
-      if: always()
       run: |
         cd test_program
         mkdir debug_files
@@ -50,17 +49,11 @@ jobs:
 
         clang++.exe -std=c++20 test_module/test_module.pcm -c -o test_module/test_module.o
         clang++.exe -fuse-ld=lld -shared -o test_module/test_module.dll test_module/test_module.o -Wl,/IMPLIB:test_module/test_module.lib
-        clang++.exe -std=c++20 main.cpp -fprebuilt-module-path=test_module -c -o main.o -DTEST_CASE=0
+        clang++.exe -std=c++20 main.cpp -fprebuilt-module-path=test_module -c -o main.o
 
         # Debug Output
-        clang++.exe -std=c++20 main.cpp -fprebuilt-module-path=test_module -c -o main.o -DTEST_CASE=5 -### 2> ./debug_files/clang_cmd_main.txt
-        clang++.exe -std=c++20 -fprebuilt-module-path=test_module -DTEST_CASE=0 -S -emit-llvm main.cpp -o ./debug_files/main_case0.ll
-        clang++.exe -std=c++20 -fprebuilt-module-path=test_module -DTEST_CASE=1 -S -emit-llvm main.cpp -o ./debug_files/main_case1.ll
-        clang++.exe -std=c++20 -fprebuilt-module-path=test_module -DTEST_CASE=2 -S -emit-llvm main.cpp -o ./debug_files/main_case2.ll
-        clang++.exe -std=c++20 -fprebuilt-module-path=test_module -DTEST_CASE=3 -S -emit-llvm main.cpp -o ./debug_files/main_case3.ll
-        clang++.exe -std=c++20 -fprebuilt-module-path=test_module -DTEST_CASE=4 -S -emit-llvm main.cpp -o ./debug_files/main_case4.ll
-        clang++.exe -std=c++20 -fprebuilt-module-path=test_module -DTEST_CASE=5 -S -emit-llvm main.cpp -o ./debug_files/main_case5.ll
-        clang++.exe -std=c++20 -fprebuilt-module-path=test_module -DTEST_CASE=6 -S -emit-llvm main.cpp -o ./debug_files/main_case6.ll
+        clang++.exe -std=c++20 main.cpp -fprebuilt-module-path=test_module -c -o main.o -### 2> ./debug_files/clang_cmd_main.txt
+        clang++.exe -std=c++20 -fprebuilt-module-path=test_module -S -emit-llvm main.cpp -o ./debug_files/main.cpp.ll
 
     - name: Build
       run: |
@@ -69,7 +62,6 @@ jobs:
         clang++.exe -std=c++20 test_module/test_module.pcm -c -o test_module/test_module.o
         clang++.exe -fuse-ld=lld -shared -o test_module/test_module.dll test_module/test_module.o -Wl,/IMPLIB:test_module/test_module.lib
 
-        mkdir debug_files
         cp ./test_module/test_module.lib debug_files/
         cp ./test_module/test_module.dll debug_files/
 
