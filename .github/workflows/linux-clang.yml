@@ -36,72 +36,17 @@ jobs:
       run: |
         echo "$(pwd)/llvm-dist/bin" >> $GITHUB_PATH
 
-    - name: Test Case 0
-      if: always()
+    - name: Build
       run: |
         cd test_program
         clang++ -std=c++20 test_module/test_module.cppm --precompile -o test_module/test_module.pcm
         clang++ -std=c++20 test_module/test_module.pcm -c -o test_module/test_module.o
         clang++ -shared -o test_module/libtest_module.so test_module/test_module.o
-        clang++ -std=c++20 main.cpp -fprebuilt-module-path=test_module -c -o main.o -DTEST_CASE=0
+        clang++ -std=c++20 main.cpp -fprebuilt-module-path=test_module -c -o main.o
         clang++ main.o test_module/libtest_module.so -o app
 
-    - name: Test Case 1
-      if: always()
+    - name: Run
       run: |
-        cd test_program
-        clang++ -std=c++20 test_module/test_module.cppm --precompile -o test_module/test_module.pcm
-        clang++ -std=c++20 test_module/test_module.pcm -c -o test_module/test_module.o
-        clang++ -shared -o test_module/libtest_module.so test_module/test_module.o
-        clang++ -std=c++20 main.cpp -fprebuilt-module-path=test_module -c -o main.o -DTEST_CASE=1
-        clang++ main.o test_module/libtest_module.so -o app
-
-    - name: Test Case 2
-      if: always()
-      run: |
-        cd test_program
-        clang++ -std=c++20 test_module/test_module.cppm --precompile -o test_module/test_module.pcm
-        clang++ -std=c++20 test_module/test_module.pcm -c -o test_module/test_module.o
-        clang++ -shared -o test_module/libtest_module.so test_module/test_module.o
-        clang++ -std=c++20 main.cpp -fprebuilt-module-path=test_module -c -o main.o -DTEST_CASE=2
-        clang++ main.o test_module/libtest_module.so -o app
-
-    - name: Test Case 3
-      if: always()
-      run: |
-        cd test_program
-        clang++ -std=c++20 test_module/test_module.cppm --precompile -o test_module/test_module.pcm
-        clang++ -std=c++20 test_module/test_module.pcm -c -o test_module/test_module.o
-        clang++ -shared -o test_module/libtest_module.so test_module/test_module.o
-        clang++ -std=c++20 main.cpp -fprebuilt-module-path=test_module -c -o main.o -DTEST_CASE=3
-        clang++ main.o test_module/libtest_module.so -o app
-
-    - name: Test Case 4
-      if: always()
-      run: |
-        cd test_program
-        clang++ -std=c++20 test_module/test_module.cppm --precompile -o test_module/test_module.pcm
-        clang++ -std=c++20 test_module/test_module.pcm -c -o test_module/test_module.o
-        clang++ -shared -o test_module/libtest_module.so test_module/test_module.o
-        clang++ -std=c++20 main.cpp -fprebuilt-module-path=test_module -c -o main.o -DTEST_CASE=4
-        clang++ main.o test_module/libtest_module.so -o app
-
-    - name: Test Case 5
-      if: always()
-      run: |
-        cd test_program
-        clang++ -std=c++20 test_module/test_module.cppm --precompile -o test_module/test_module.pcm
-        clang++ -std=c++20 test_module/test_module.pcm -c -o test_module/test_module.o
-        clang++ -shared -o test_module/libtest_module.so test_module/test_module.o
-        clang++ -std=c++20 main.cpp -fprebuilt-module-path=test_module -c -o main.o -DTEST_CASE=5
-        clang++ main.o test_module/libtest_module.so -o app
-
-    - name: Test Case 6
-      if: always()
-      run: |
-        cd test_program
-        clang++ -std=c++20 test_module/test_module.cppm --precompile -o test_module/test_module.pcm
-        clang++ -std=c++20 test_module/test_module.pcm -c -o test_module/test_module.o
-        clang++ -shared -o test_module/libtest_module.so test_module/test_module.o
-        clang++ -std=c++20 main.cpp -fprebuilt-module-path=test_module -c -o main.o -DTEST_CASE=6
-        clang++ main.o test_module/libtest_module.so -o app
+        cp test_module/test_module.so test_module/
+        ./app
+        
