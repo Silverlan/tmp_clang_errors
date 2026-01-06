@@ -48,5 +48,5 @@ jobs:
     - name: Run
       run: |
         cd test_program
-        cp test_module/libtest_module.so test_module/
+        cp test_module/libtest_module.so ./
         ./app
