@@ -2,9 +2,9 @@ name: Windows Clang Build
 
 on:
   push:
-    branches: [ "function-address-mismatch" ]
+    branches: [ "function-address-mismatch-msvc-linker" ]
   pull_request:
-    branches: [ "function-address-mismatch" ]
+    branches: [ "function-address-mismatch-msvc-linker" ]
   workflow_dispatch:
 
 jobs:
@@ -80,4 +80,5 @@ jobs:
       with:
         name: debug-files
         path: test_program/debug_files/**
+
 
