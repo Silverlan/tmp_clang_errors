@@ -48,7 +48,7 @@ jobs:
         clang++.exe -std=c++20 -S -emit-llvm test_module/test_module.pcm -o ./debug_files/test_module.ll
 
         clang++.exe -std=c++20 test_module/test_module.pcm -c -o test_module/test_module.o
-        clang++.exe -fuse-ld=lld -shared -o test_module/test_module.dll test_module/test_module.o -Wl,/IMPLIB:test_module/test_module.lib
+        clang++.exe -shared -o test_module/test_module.dll test_module/test_module.o -Wl,/IMPLIB:test_module/test_module.lib
         clang++.exe -std=c++20 main.cpp -fprebuilt-module-path=test_module -c -o main.o
 
         # Debug Output
@@ -60,13 +60,13 @@ jobs:
         cd test_program
         clang++.exe -std=c++20 test_module/test_module.cppm --precompile -o test_module/test_module.pcm
         clang++.exe -std=c++20 test_module/test_module.pcm -c -o test_module/test_module.o
-        clang++.exe -fuse-ld=lld -shared -o test_module/test_module.dll test_module/test_module.o -Wl,/IMPLIB:test_module/test_module.lib
+        clang++.exe -shared -o test_module/test_module.dll test_module/test_module.o -Wl,/IMPLIB:test_module/test_module.lib
 
         cp ./test_module/test_module.lib debug_files/
         cp ./test_module/test_module.dll debug_files/
 
         clang++.exe -std=c++20 main.cpp -fprebuilt-module-path=test_module -c -o main.o
-        clang++.exe -fuse-ld=lld main.o test_module/test_module.lib -o app.exe
+        clang++.exe main.o test_module/test_module.lib -o app.exe
 
     - name: Run
       run: |
@@ -80,3 +80,4 @@ jobs:
       with:
         name: debug-files
         path: test_program/debug_files/**
+
